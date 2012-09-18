@@ -30,7 +30,9 @@ $path = dirname(__FILE__) . '/';
 
 // Test if batch mode
 if (substr($sapi_type, 0, 3) == 'cgi') {
-	echo "Error: You are using PHP for CGI. To execute " . $script_file . " from command line, you must use PHP for CLI mode.\n";
+	echo "Error: You are using PHP for CGI. To execute ";
+	echo $script_file;
+	echo " from command line, you must use PHP for CLI mode.\n";
 	exit;
 }
 
@@ -42,12 +44,14 @@ $error = 0;
 // -------------------- START OF YOUR CODE HERE --------------------
 // Include Dolibarr environment
 require_once $path . "../../htdocs/master.inc.php";
-// After this $db, $mysoc, $langs and $conf->entity are defined. Opened handler to database will be closed at end of file.
+// After this $db, $mysoc, $langs and $conf->entity are defined.
+// Opened handler to database will be closed at end of file.
 //$langs->setDefaultLang('en_US'); 	// To change default language of $langs
 $langs->load("main");	// To load language file for default language
 @set_time_limit(0);	 // No timeout for this script
 // Load user and its permissions
-$result = $user->fetch('', 'admin'); // Load user for login 'admin'. Comment line to run as anonymous user.
+// Load user for login 'admin'. Comment line to run as anonymous user.
+$result = $user->fetch('', 'admin');
 if ( ! $result > 0) {
 	dol_print_error('', $user->error);
 	exit;
@@ -91,7 +95,8 @@ $myobject = new Skeleton_Class($db);
 	else echo "Object with id=".$id." loaded\n";
  */
 
-// Example for updating object in database ($myobject must have been loaded by a fetch before)
+// Example for updating object in database
+// ($myobject must have been loaded by a fetch before)
 /*
 	dol_syslog($script_file." UPDATE", LOG_DEBUG);
 	$myobject->prop1='newvalue_prop1';
@@ -101,7 +106,8 @@ $myobject = new Skeleton_Class($db);
 	else echo "Object with id ".$myobject->id." updated\n";
  */
 
-// Example for deleting object in database ($myobject must have been loaded by a fetch before)
+// Example for deleting object in database
+// ($myobject must have been loaded by a fetch before)
 /*
 	dol_syslog($script_file." DELETE", LOG_DEBUG);
 	$result=$myobject->delete($user);

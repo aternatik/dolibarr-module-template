@@ -17,17 +17,17 @@
  */
 
 /**
- *	\file		core/triggers/interface_99_modMyodule_Mytrigger.class.php
- *	\ingroup	mymodule
- *	\brief		Sample trigger
- *	\remarks	You can create other triggers by copying this one
- *				- File name should be either:
- *					interface_99_modMymodule_Mytrigger.class.php
- *					interface_99_all_Mytrigger.class.php
- *				- The file must stay in core/triggers
- *				- The class name must be InterfaceMytrigger
- *				- The constructor method must be named InterfaceMytrigger
- *				- The name property name must be Mytrigger
+ * 	\file		core/triggers/interface_99_modMyodule_Mytrigger.class.php
+ * 	\ingroup	mymodule
+ * 	\brief		Sample trigger
+ * 	\remarks	You can create other triggers by copying this one
+ * 				- File name should be either:
+ * 					interface_99_modMymodule_Mytrigger.class.php
+ * 					interface_99_all_Mytrigger.class.php
+ * 				- The file must stay in core/triggers
+ * 				- The class name must be InterfaceMytrigger
+ * 				- The constructor method must be named InterfaceMytrigger
+ * 				- The name property name must be Mytrigger
  */
 
 /**
@@ -41,7 +41,7 @@ class InterfaceDemo
 	/**
 	 * Constructor
 	 *
-	 *	@param		DoliDB		$db		Database handler
+	 * 	@param		DoliDB		$db		Database handler
 	 */
 	function InterfaceDemo($db)
 	{
@@ -49,15 +49,18 @@ class InterfaceDemo
 
 		$this->name = preg_replace('/^Interface/i', '', get_class($this));
 		$this->family = "demo";
-		$this->description = "Triggers of this module are empty functions. They have no effect. They are provided for tutorial purpose only.";
-		$this->version = 'dolibarr';	// 'development', 'experimental', 'dolibarr' or version
+		$this->description = "Triggers of this module are empty functions."
+			. "They have no effect."
+			. "They are provided for tutorial purpose only.";
+		// 'development', 'experimental', 'dolibarr' or version
+		$this->version = 'dolibarr';
 		$this->picto = 'technic';
 	}
 
 	/**
 	 * Return name of trigger file
 	 *
-	 *	@return		string	Name of trigger file
+	 * 	@return		string	Name of trigger file
 	 */
 	function getName()
 	{
@@ -67,7 +70,7 @@ class InterfaceDemo
 	/**
 	 * Return description of trigger file
 	 *
-	 *	@return		string	Description of trigger file
+	 * 	@return		string	Description of trigger file
 	 */
 	function getDesc()
 	{
@@ -77,7 +80,7 @@ class InterfaceDemo
 	/**
 	 * Return version of trigger file
 	 *
-	 *	@return		string	Version of trigger file
+	 * 	@return		string	Version of trigger file
 	 */
 	function getVersion()
 	{
@@ -94,14 +97,15 @@ class InterfaceDemo
 
 	/**
 	 * Function called when a Dolibarrr business event is done.
-	 * All functions "run_trigger" are triggered if file is inside directory htdocs/core/triggers
+	 * All functions "run_trigger" are triggered if file
+	 * is inside directory htdocs/core/triggers
 	 *
-	 *	@param		string		$action		Event action code
-	 *	@param		Object		$object		Object
-	 *	@param		User		$user		Object user
-	 *	@param		Translate	$langs		Object langs
-	 *	@param		conf		$conf		Object conf
-	 *	@return		int						<0 if KO, 0 if no triggered ran, >0 if OK
+	 * 	@param		string		$action		Event action code
+	 * 	@param		Object		$object		Object
+	 * 	@param		User		$user		Object user
+	 * 	@param		Translate	$langs		Object langs
+	 * 	@param		conf		$conf		Object conf
+	 * 	@return		int						<0 if KO, 0 if no triggered ran, >0 if OK
 	 */
 	function run_trigger($action, $object, $user, $langs, $conf)
 	{

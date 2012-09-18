@@ -29,11 +29,15 @@
 //if (! defined('NOREQUIRETRAN'))	define('NOREQUIRETRAN','1');
 //if (! defined('NOCSRFCHECK'))		define('NOCSRFCHECK','1');
 //if (! defined('NOTOKENRENEWAL'))	define('NOTOKENRENEWAL','1');
-//if (! defined('NOREQUIREMENU'))	define('NOREQUIREMENU','1');	// If there is no menu to show
-//if (! defined('NOREQUIREHTML'))	define('NOREQUIREHTML','1');	// If we don't need to load the html.form.class.php
+// If there is no menu to show
+//if (! defined('NOREQUIREMENU'))	define('NOREQUIREMENU','1');
+// If we don't need to load the html.form.class.php
+//if (! defined('NOREQUIREHTML'))	define('NOREQUIREHTML','1');
 //if (! defined('NOREQUIREAJAX'))	define('NOREQUIREAJAX','1');
-//if (! defined("NOLOGIN"))			define("NOLOGIN",'1');			// If this page is public (can be called outside logged session)
-// Choose the following lines to use the correct relative path (../, ../../, etc)
+// If this page is public (can be called outside logged session)
+//if (! defined("NOLOGIN"))			define("NOLOGIN",'1');
+// Choose the following lines to use the correct relative path
+// (../, ../../, etc)
 $res = 0;
 if ( ! $res && file_exists("../main.inc.php"))
 	$res = @include("../main.inc.php");
@@ -41,14 +45,16 @@ if ( ! $res && file_exists("../../main.inc.php"))
 	$res = @include("../../main.inc.php");
 if ( ! $res && file_exists("../../../main.inc.php"))
 	$res = @include("../../../main.inc.php");
+// The following should only be used in development environments
 if ( ! $res && file_exists("../../../dolibarr/htdocs/main.inc.php"))
-	$res = @include("../../../dolibarr/htdocs/main.inc.php");		// Used on dev env only
+	$res = @include("../../../dolibarr/htdocs/main.inc.php");
 if ( ! $res && file_exists("../../../../dolibarr/htdocs/main.inc.php"))
-	$res = @include("../../../../dolibarr/htdocs/main.inc.php");	// Used on dev env only
+	$res = @include("../../../../dolibarr/htdocs/main.inc.php");
 if ( ! $res && file_exists("../../../../../dolibarr/htdocs/main.inc.php"))
-	$res = @include("../../../../../dolibarr/htdocs/main.inc.php");	// Used on dev env only
+	$res = @include("../../../../../dolibarr/htdocs/main.inc.php");
 if ( ! $res) die("Main include failed");
-// Change this following line to use the correct relative path from htdocs (do not remove DOL_DOCUMENT_ROOT)
+// Change this following line to use the correct relative path from htdocs
+// (do not remove DOL_DOCUMENT_ROOT)
 require_once DOL_DOCUMENT_ROOT . "custom/mymodule/class/myclass.class.php";
 
 // Load translation files required by the page

@@ -18,9 +18,11 @@
 # Générique
 #
 
-# Module label 'ModuleXXXName' (where XXX is value of numeric property 'numero' of module)
+# Module label 'ModuleXXXName'
+# (where XXX is value of numeric property 'numero' of module)
 Module10000Name = Mon module
-# Module description 'ModuleXXXDesc' (where XXX is value of numeric property 'numero' of module)
+# Module description 'ModuleXXXDesc'
+# (where XXX is value of numeric property 'numero' of module)
 Module10000Desc = Description de mon module
 
 #
