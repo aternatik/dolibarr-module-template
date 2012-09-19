@@ -17,11 +17,11 @@
  */
 
 /**
- *	\defgroup	mymodule	MyModule module
- *	\brief		MyModule module descriptor.
- *	\file		core/modules/modMyModule.class.php
- *	\ingroup	mymodule
- *	\brief		Description and activation file for module MyModule
+ * 	\defgroup	mymodule	MyModule module
+ * 	\brief		MyModule module descriptor.
+ * 	\file		core/modules/modMyModule.class.php
+ * 	\ingroup	mymodule
+ * 	\brief		Description and activation file for module MyModule
  */
 include_once DOL_DOCUMENT_ROOT . "/core/modules/DolibarrModules.class.php";
 
@@ -32,9 +32,9 @@ class modMyModule extends DolibarrModules
 {
 
 	/**
-	 *	Constructor. Define names, constants, directories, boxes, permissions
+	 * 	Constructor. Define names, constants, directories, boxes, permissions
 	 *
-	 *	@param	DoliDB		$db	Database handler
+	 * 	@param	DoliDB		$db	Database handler
 	 */
 	function modMyModule($db)
 	{
@@ -74,32 +74,30 @@ class modMyModule extends DolibarrModules
 		// If file is in module/img directory under name object_pictovalue.png
 		// use this->picto='pictovalue@module'
 		$this->picto = 'mymodule@mymodule'; // mypicto@mymodule
-
 		// Defined all module parts (triggers, login, substitutions, menus, css, etc...)
 		// for default path (eg: /mymodule/core/xxxxx) (0=disable, 1=enable)
 		// for specific path of parts (eg: /mymodule/core/modules/barcode)
 		// for specific css file (eg: /mymodule/css/mymodule.css.php)
-		//$this->module_parts = array(
-		//	// Set this to 1 if module has its own trigger directory
-		//	'triggers' => 0,
-		//	// Set this to 1 if module has its own login method directory
-		//	'login' => 0,
-		//	// Set this to 1 if module has its own substitution function file
-		//	'substitutions' => 0,
-		//	// Set this to 1 if module has its own menus handler directory
-		//	'menus' => 0,
-		//	// Set this to 1 if module has its own barcode directory
-		//	'barcode' => 0,
-		//	// Set this to 1 if module has its own models directory
-		//	'models' => 0,
-		//	// Set this to relative path of css if module has its own css file
-		//	'css' => '/mymodule/css/mycss.css.php',
-		//	// Set here all hooks context managed by module
-		//	'hooks' => array('hookcontext1','hookcontext2')
-		//	// Set here all workflow context managed by module
-		//	'workflow' => array('order' => array('WORKFLOW_ORDER_AUTOCREATE_INVOICE'))
-		//);
-		$this->module_parts = array();
+		$this->module_parts = array(
+			// Set this to 1 if module has its own trigger directory
+			'triggers' => 1,
+			// Set this to 1 if module has its own login method directory
+			//'login' => 0,
+			// Set this to 1 if module has its own substitution function file
+			//'substitutions' => 0,
+			// Set this to 1 if module has its own menus handler directory
+			//'menus' => 0,
+			// Set this to 1 if module has its own barcode directory
+			//'barcode' => 0,
+			// Set this to 1 if module has its own models directory
+			//'models' => 0,
+			// Set this to relative path of css if module has its own css file
+			'css' => '/mymodule/css/mycss.css.php',
+			// Set here all hooks context managed by module
+			//'hooks' => array('hookcontext1','hookcontext2')
+			// Set here all workflow context managed by module
+			//'workflow' => array('order' => array('WORKFLOW_ORDER_AUTOCREATE_INVOICE'))
+		);
 
 		// Data directories to create when module is enabled.
 		// Example: this->dirs = array("/mymodule/temp");
@@ -112,46 +110,44 @@ class modMyModule extends DolibarrModules
 		// Dependencies
 		// List of modules id that must be enabled if this module is enabled
 		$this->depends = array();
-		 // List of modules id to disable if this one is disabled
+		// List of modules id to disable if this one is disabled
 		$this->requiredby = array();
-			 // Minimum version of PHP required by module
+		// Minimum version of PHP required by module
 		$this->phpmin = array(5, 3);
-		 // Minimum version of Dolibarr required by module
+		// Minimum version of Dolibarr required by module
 		$this->need_dolibarr_version = array(3, 2);
 		$this->langfiles = array("mymodule@mymodule"); // langfiles@mymodule
-
 		// Constants
 		// List of particular constants to add when module is enabled
 		// (key, 'chaine', value, desc, visible, 'current' or 'allentities', deleteonunactive)
 		// Example:
-		//$this->const=array(
-		//	0=>array(
-		//		'MYMODULE_MYNEWCONST1',
-		//		'chaine',
-		//		'myvalue',
-		//		'This is a constant to add',
-		//		1
-		//	),
-		//	1=>array(
-		//		'MYMODULE_MYNEWCONST2',
-		//		'chaine',
-		//		'myvalue',
-		//		'This is another constant to add',
-		//		0
-		//	)
-		//);
-		$this->const = array();
+		$this->const = array(
+			//	0=>array(
+			//		'MYMODULE_MYNEWCONST1',
+			//		'chaine',
+			//		'myvalue',
+			//		'This is a constant to add',
+			//		1
+			//	),
+			//	1=>array(
+			//		'MYMODULE_MYNEWCONST2',
+			//		'chaine',
+			//		'myvalue',
+			//		'This is another constant to add',
+			//		0
+			//	)
+		);
 
 		// Array to add new pages in new tabs
 		// Example:
-		//$this->tabs = array(
-		//	// To add a new tab identified by code tabname1
-		//	'objecttype:+tabname1:Title1:langfile@mymodule:$user->rights->mymodule->read:/mymodule/mynewtab1.php?id=__ID__',
-		//	// To add another new tab identified by code tabname2
-		//	'objecttype:+tabname2:Title2:langfile@mymodule:$user->rights->othermodule->read:/mymodule/mynewtab2.php?id=__ID__',
-		//	// To remove an existing tab identified by code tabname
-		//	'objecttype:-tabname'
-		//);
+		$this->tabs = array(
+			//	// To add a new tab identified by code tabname1
+			//	'objecttype:+tabname1:Title1:langfile@mymodule:$user->rights->mymodule->read:/mymodule/mynewtab1.php?id=__ID__',
+			//	// To add another new tab identified by code tabname2
+			//	'objecttype:+tabname2:Title2:langfile@mymodule:$user->rights->othermodule->read:/mymodule/mynewtab2.php?id=__ID__',
+			//	// To remove an existing tab identified by code tabname
+			//	'objecttype:-tabname'
+		);
 		// where objecttype can be
 		// 'thirdparty'			to add a tab in third party view
 		// 'intervention'		to add a tab in intervention view
@@ -169,62 +165,61 @@ class modMyModule extends DolibarrModules
 		// 'contact'			to add a tab in contact view
 		// 'categories_x'		to add a tab in category view
 		// (replace 'x' by type of category (0=product, 1=supplier, 2=customer, 3=member)
-		$this->tabs = array();
-
 		// Dictionnaries
 		if ( ! isset($conf->mymodule->enabled)) $conf->mymodule->enabled = 0;
 		$this->dictionnaries = array();
 		/* Example:
-		// This is to avoid warnings
-		if (! isset($conf->mymodule->enabled)) $conf->mymodule->enabled=0;
-		$this->dictionnaries=array(
-			'langs'=>'mymodule@mymodule',
-			// List of tables we want to see into dictonnary editor
-			'tabname'=>array(
-				MAIN_DB_PREFIX."table1",
-				MAIN_DB_PREFIX."table2",
-				MAIN_DB_PREFIX."table3"
-			),
-			// Label of tables
-			'tablib'=>array("Table1","Table2","Table3"),
-			// Request to select fields
-			'tabsql'=>array(
-				'SELECT f.rowid as rowid, f.code, f.label, f.active'
-					. ' FROM ' . MAIN_DB_PREFIX . 'table1 as f',
-				'SELECT f.rowid as rowid, f.code, f.label, f.active'
-					. ' FROM ' . MAIN_DB_PREFIX . 'table2 as f',
-				'SELECT f.rowid as rowid, f.code, f.label, f.active'
-					. ' FROM ' . MAIN_DB_PREFIX . 'table3 as f'
-			),
-			// Sort order
-			'tabsqlsort'=>array("label ASC","label ASC","label ASC"),
-			// List of fields (result of select to show dictionnary)
-			'tabfield'=>array("code,label","code,label","code,label"),
-			// List of fields (list of fields to edit a record)
-			'tabfieldvalue'=>array("code,label","code,label","code,label"),
-			// List of fields (list of fields for insert)
-			'tabfieldinsert'=>array("code,label","code,label","code,label"),
-			// Name of columns with primary key (try to always name it 'rowid')
-			'tabrowid'=>array("rowid","rowid","rowid"),
-			// Condition to show each dictionnary
-			'tabcond'=>array(
-				$conf->mymodule->enabled,
-				$conf->mymodule->enabled,
-				$conf->mymodule->enabled
-			)
-		);
-		*/
+		  // This is to avoid warnings
+		  if (! isset($conf->mymodule->enabled)) $conf->mymodule->enabled=0;
+		  $this->dictionnaries=array(
+		  'langs'=>'mymodule@mymodule',
+		  // List of tables we want to see into dictonnary editor
+		  'tabname'=>array(
+		  MAIN_DB_PREFIX."table1",
+		  MAIN_DB_PREFIX."table2",
+		  MAIN_DB_PREFIX."table3"
+		  ),
+		  // Label of tables
+		  'tablib'=>array("Table1","Table2","Table3"),
+		  // Request to select fields
+		  'tabsql'=>array(
+		  'SELECT f.rowid as rowid, f.code, f.label, f.active'
+		  . ' FROM ' . MAIN_DB_PREFIX . 'table1 as f',
+		  'SELECT f.rowid as rowid, f.code, f.label, f.active'
+		  . ' FROM ' . MAIN_DB_PREFIX . 'table2 as f',
+		  'SELECT f.rowid as rowid, f.code, f.label, f.active'
+		  . ' FROM ' . MAIN_DB_PREFIX . 'table3 as f'
+		  ),
+		  // Sort order
+		  'tabsqlsort'=>array("label ASC","label ASC","label ASC"),
+		  // List of fields (result of select to show dictionnary)
+		  'tabfield'=>array("code,label","code,label","code,label"),
+		  // List of fields (list of fields to edit a record)
+		  'tabfieldvalue'=>array("code,label","code,label","code,label"),
+		  // List of fields (list of fields for insert)
+		  'tabfieldinsert'=>array("code,label","code,label","code,label"),
+		  // Name of columns with primary key (try to always name it 'rowid')
+		  'tabrowid'=>array("rowid","rowid","rowid"),
+		  // Condition to show each dictionnary
+		  'tabcond'=>array(
+		  $conf->mymodule->enabled,
+		  $conf->mymodule->enabled,
+		  $conf->mymodule->enabled
+		  )
+		  );
+		 */
 
 		// Boxes
 		// Add here list of php file(s) stored in core/boxes that contains class to show a box.
 		$this->boxes = array(); // List of boxes
 		$r = 0;
 		// Example:
+
+		$this->boxes[$r][1] = "mybox.php";
+		$r ++;
 		/*
-			$this->boxes[$r][1] = "myboxa.php";
-			$r++;
-			$this->boxes[$r][1] = "myboxb.php";
-			$r++;
+		  $this->boxes[$r][1] = "myboxb.php";
+		  $r++;
 		 */
 
 		// Permissions
@@ -330,7 +325,6 @@ class modMyModule extends DolibarrModules
 		//	'user'=>2
 		//);
 		//$r++;
-
 		// Exports
 		$r = 1;
 
@@ -431,8 +425,8 @@ class modMyModule extends DolibarrModules
 	 * (defined in constructor) into Dolibarr database.
 	 * It also creates data directories
 	 *
-	 *	@param		string	$options	Options when enabling module ('', 'noboxes')
-	 *	@return		int					1 if OK, 0 if KO
+	 * 	@param		string	$options	Options when enabling module ('', 'noboxes')
+	 * 	@return		int					1 if OK, 0 if KO
 	 */
 	function init($options = '')
 	{
@@ -448,8 +442,8 @@ class modMyModule extends DolibarrModules
 	 * Remove from database constants, boxes and permissions from Dolibarr database.
 	 * Data directories are not deleted
 	 *
-	 *	@param		string	$options	Options when enabling module ('', 'noboxes')
-	 *	@return		int					1 if OK, 0 if KO
+	 * 	@param		string	$options	Options when enabling module ('', 'noboxes')
+	 * 	@return		int					1 if OK, 0 if KO
 	 */
 	function remove($options = '')
 	{
@@ -464,7 +458,7 @@ class modMyModule extends DolibarrModules
 	 * and create data commands must be stored in directory /mymodule/sql/
 	 * This function is called by this->init
 	 *
-	 *	@return		int		<=0 if KO, >0 if OK
+	 * 	@return		int		<=0 if KO, >0 if OK
 	 */
 	function load_tables()
 	{

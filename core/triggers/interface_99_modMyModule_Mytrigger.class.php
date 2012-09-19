@@ -31,9 +31,9 @@
  */
 
 /**
- * Class of triggers for demo module
+ * Trigger class
  */
-class InterfaceDemo
+class InterfaceMytrigger
 {
 
 	var $db;
@@ -53,12 +53,12 @@ class InterfaceDemo
 			. "They have no effect."
 			. "They are provided for tutorial purpose only.";
 		// 'development', 'experimental', 'dolibarr' or version
-		$this->version = 'dolibarr';
-		$this->picto = 'technic';
+		$this->version = 'development';
+		$this->picto = 'mymodule@mymodule';
 	}
 
 	/**
-	 * Return name of trigger file
+	 * Trigger name
 	 *
 	 * 	@return		string	Name of trigger file
 	 */
@@ -68,7 +68,7 @@ class InterfaceDemo
 	}
 
 	/**
-	 * Return description of trigger file
+	 * Trigger description
 	 *
 	 * 	@return		string	Description of trigger file
 	 */
@@ -78,7 +78,7 @@ class InterfaceDemo
 	}
 
 	/**
-	 * Return version of trigger file
+	 * Trigger version
 	 *
 	 * 	@return		string	Version of trigger file
 	 */
@@ -98,7 +98,7 @@ class InterfaceDemo
 	/**
 	 * Function called when a Dolibarrr business event is done.
 	 * All functions "run_trigger" are triggered if file
-	 * is inside directory htdocs/core/triggers
+	 * is inside directory core/triggers
 	 *
 	 * 	@param		string		$action		Event action code
 	 * 	@param		Object		$object		Object
