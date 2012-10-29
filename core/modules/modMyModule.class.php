@@ -211,11 +211,11 @@ class modMyModule extends DolibarrModules
 
 		// Boxes
 		// Add here list of php file(s) stored in core/boxes that contains class to show a box.
-		$this->boxes = array(); // List of boxes
+		$this->boxes = array(); // Boxes list
 		$r = 0;
 		// Example:
 
-		$this->boxes[$r][1] = "mybox.php";
+		$this->boxes[$r][1] = "mybox@mymodule";
 		$r ++;
 		/*
 		  $this->boxes[$r][1] = "myboxb.php";
