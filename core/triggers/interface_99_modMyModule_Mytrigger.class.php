@@ -43,7 +43,7 @@ class InterfaceMytrigger
 	 *
 	 * 	@param		DoliDB		$db		Database handler
 	 */
-	function InterfaceDemo($db)
+	function InterfaceMyTrigger($db)
 	{
 		$this->db = $db;
 
