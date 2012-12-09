@@ -64,6 +64,15 @@ dol_fiche_head($head, 'about', $langs->trans("Module10000Name"), 0,
 // About page goes here
 echo $langs->trans("MyModuleAboutPage");
 
+$buffer = file_get_contents(dol_buildpath('/mymodule/README.md',0));
+print nl2br($buffer);
+
+print '<BR>';
+
+print '<img src="'.dol_buildpath('/mymodule/img/gplv3.png',1).'"/>';
+
+print '<a href="'.dol_buildpath('/mymodule/COPYING',1).'">License GPL V 3</a>';
+
 llxFooter();
 
 $db->close();
