@@ -39,20 +39,28 @@
 // Choose the following lines to use the correct relative path
 // (../, ../../, etc)
 $res = 0;
-if ( ! $res && file_exists("../main.inc.php"))
+if (! $res && file_exists("../main.inc.php")) {
 	$res = @include("../main.inc.php");
-if ( ! $res && file_exists("../../main.inc.php"))
+}
+if (! $res && file_exists("../../main.inc.php")) {
 	$res = @include("../../main.inc.php");
-if ( ! $res && file_exists("../../../main.inc.php"))
+}
+if (! $res && file_exists("../../../main.inc.php")) {
 	$res = @include("../../../main.inc.php");
+}
 // The following should only be used in development environments
-if ( ! $res && file_exists("../../../dolibarr/htdocs/main.inc.php"))
+if (! $res && file_exists("../../../dolibarr/htdocs/main.inc.php")) {
 	$res = @include("../../../dolibarr/htdocs/main.inc.php");
-if ( ! $res && file_exists("../../../../dolibarr/htdocs/main.inc.php"))
+}
+if (! $res && file_exists("../../../../dolibarr/htdocs/main.inc.php")) {
 	$res = @include("../../../../dolibarr/htdocs/main.inc.php");
-if ( ! $res && file_exists("../../../../../dolibarr/htdocs/main.inc.php"))
+}
+if (! $res && file_exists("../../../../../dolibarr/htdocs/main.inc.php")) {
 	$res = @include("../../../../../dolibarr/htdocs/main.inc.php");
-if ( ! $res) die("Main include failed");
+}
+if (! $res) {
+	die("Main include failed");
+}
 // Change this following line to use the correct relative path from htdocs
 // (do not remove DOL_DOCUMENT_ROOT)
 require_once DOL_DOCUMENT_ROOT . "custom/mymodule/class/myclass.class.php";
@@ -66,7 +74,8 @@ $action = GETPOST('action', 'alpha');
 $myparam = GETPOST('myparam', 'alpha');
 
 // Access control
-if ($user->societe_id > 0) { // External user
+if ($user->societe_id > 0) {
+	// External user
 	accessforbidden();
 }
 
@@ -78,7 +87,7 @@ if ($user->societe_id > 0) { // External user
  */
 
 if ($action == 'add') {
-	$myobject = new Skeleton_Class($db);
+	$myobject = new SkeletonClass($db);
 	$myobject->prop1 = $_POST["field1"];
 	$myobject->prop2 = $_POST["field2"];
 	$result = $myobject->create($user);
@@ -126,4 +135,3 @@ $somethingshown = $myobject->showLinkedObjectBlock();
 // End of page
 llxFooter();
 $db->close();
-?>

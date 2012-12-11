@@ -27,22 +27,22 @@ include_once DOL_DOCUMENT_ROOT . "/core/boxes/modules_boxes.php";
 /**
  * Class to manage the box
  */
-class mybox extends ModeleBoxes
+class MyBox extends ModeleBoxes
 {
 
-	var $boxcode = "mybox";
-	var $boximg = "mymodule@mymodule";
-	var $boxlabel;
-	var $depends = array("mymodule");
-	var $db;
-	var $param;
-	var $info_box_head = array();
-	var $info_box_contents = array();
+	public $boxcode = "mybox";
+	public $boximg = "mymodule@mymodule";
+	public $boxlabel;
+	public $depends = array("mymodule");
+	public $db;
+	public $param;
+	public $info_box_head = array();
+	public $info_box_contents = array();
 
 	/**
 	 * Constructor
 	 */
-	function mybox()
+	public function __construct()
 	{
 		global $langs;
 		$langs->load("boxes");
@@ -56,7 +56,7 @@ class mybox extends ModeleBoxes
 	 * 	@param		int		$max		Maximum number of records to load
 	 * 	@return		void
 	 */
-	function loadBox($max = 5)
+	public function loadBox($max = 5)
 	{
 		global $conf, $user, $langs, $db;
 
@@ -81,11 +81,8 @@ class mybox extends ModeleBoxes
 	 * 	@param  array	$contents   Array with properties of box lines
 	 * 	@return	void
 	 */
-	function showBox($head = null, $contents = null)
+	public function showBox($head = null, $contents = null)
 	{
 		parent::showBox($this->info_box_head, $this->info_box_contents);
 	}
-
 }
-
-?>

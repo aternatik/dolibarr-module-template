@@ -60,7 +60,8 @@ $user->getrights();
 
 
 echo "***** " . $script_file . " (" . $version . ") *****\n";
-if ( ! isset($argv[1])) { // Check parameters
+if (! isset($argv[1])) {
+	// Check parameters
 	echo "Usage: " . $script_file . " param1 param2 ...\n";
 	exit;
 }
@@ -73,9 +74,9 @@ echo 'Argument 2=' . $argv[2] . "\n";
 $db->begin();
 
 
-// Examples for manipulating class skeleton_class
+// Examples for manipulating class skeletonclass
 require_once DOL_DOCUMENT_ROOT . "/mymodule/myclass.class.php";
-$myobject = new Skeleton_Class($db);
+$myobject = new SkeletonClass($db);
 
 // Example for inserting creating object in database
 /*
@@ -159,4 +160,3 @@ if ( ! $error) {
 $db->close(); // Close database opened handler
 
 return $error;
-?>

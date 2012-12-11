@@ -24,8 +24,9 @@
  */
 // Dolibarr environment
 $res = @include("../../main.inc.php"); // From htdocs directory
-if ( ! $res)
-		$res = @include("../../../main.inc.php"); // From "custom" directory
+if (! $res) {
+	$res = @include("../../../main.inc.php"); // From "custom" directory
+}
 
 
 // Libraries
@@ -40,7 +41,9 @@ dol_include_once('/mymodule/lib/PHP Markdown 1.0.1o/markdown.php');
 $langs->load("mymodule@mymodule");
 
 // Access control
-if ( ! $user->admin) accessforbidden();
+if (! $user->admin) {
+	accessforbidden();
+}
 
 // Parameters
 $action = GETPOST('action', 'alpha');
@@ -61,27 +64,28 @@ $linkback = '<a href="' . DOL_URL_ROOT . '/admin/modules.php">'
 print_fiche_titre($langs->trans($page_name), $linkback);
 
 // Configuration header
-$head = mymoduleadmin_prepare_head();
-dol_fiche_head($head, 'about', $langs->trans("Module10000Name"), 0,
-	"mymodule@mymodule");
+$head = mymoduleAdminPrepareHead();
+dol_fiche_head(
+	$head,
+	'about',
+	$langs->trans("Module10000Name"),
+	0,
+	'mymodule@mymodule'
+);
 
 // About page goes here
 echo $langs->trans("MyModuleAboutPage");
 
-print '<br>';
+echo '<br>';
 
-$buffer = file_get_contents(dol_buildpath('/mymodule/README.md',0));
-print Markdown($buffer);
+$buffer = file_get_contents(dol_buildpath('/mymodule/README.md', 0));
+echo Markdown($buffer);
 
-print '<br>';
-
-print '<a href="'.dol_buildpath('/mymodule/COPYING',1).'">';
-
-print '<img src="'.dol_buildpath('/mymodule/img/gplv3.png',1).'"/>';
-
-print '</a>';
+echo '<br>',
+'<a href="' . dol_buildpath('/mymodule/COPYING', 1) . '">',
+'<img src="' . dol_buildpath('/mymodule/img/gplv3.png', 1) . '"/>',
+'</a>';
 
 llxFooter();
 
 $db->close();
-?>

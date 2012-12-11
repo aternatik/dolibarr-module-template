@@ -36,7 +36,7 @@ class modMyModule extends DolibarrModules
 	 *
 	 * 	@param	DoliDB		$db	Database handler
 	 */
-	function modMyModule($db)
+	public function __construct($db)
 	{
 		global $langs, $conf;
 
@@ -166,7 +166,9 @@ class modMyModule extends DolibarrModules
 		// 'categories_x'		to add a tab in category view
 		// (replace 'x' by type of category (0=product, 1=supplier, 2=customer, 3=member)
 		// Dictionnaries
-		if ( ! isset($conf->mymodule->enabled)) $conf->mymodule->enabled = 0;
+		if (! isset($conf->mymodule->enabled)) {
+			$conf->mymodule->enabled = 0;
+		}
 		$this->dictionnaries = array();
 		/* Example:
 		  // This is to avoid warnings
@@ -215,7 +217,7 @@ class modMyModule extends DolibarrModules
 		$r = 0;
 		// Example:
 
-		$this->boxes[$r][1] = "mybox@mymodule";
+		$this->boxes[$r][1] = "MyBox@mymodule";
 		$r ++;
 		/*
 		  $this->boxes[$r][1] = "myboxb.php";
@@ -428,11 +430,11 @@ class modMyModule extends DolibarrModules
 	 * 	@param		string	$options	Options when enabling module ('', 'noboxes')
 	 * 	@return		int					1 if OK, 0 if KO
 	 */
-	function init($options = '')
+	public function init($options = '')
 	{
 		$sql = array();
 
-		$result = $this->load_tables();
+		$result = $this->loadTables();
 
 		return $this->_init($sql, $options);
 	}
@@ -445,7 +447,7 @@ class modMyModule extends DolibarrModules
 	 * 	@param		string	$options	Options when enabling module ('', 'noboxes')
 	 * 	@return		int					1 if OK, 0 if KO
 	 */
-	function remove($options = '')
+	public function remove($options = '')
 	{
 		$sql = array();
 
@@ -460,11 +462,8 @@ class modMyModule extends DolibarrModules
 	 *
 	 * 	@return		int		<=0 if KO, >0 if OK
 	 */
-	function load_tables()
+	private function loadTables()
 	{
 		return $this->_load_tables('/mymodule/sql/');
 	}
-
 }
-
-?>
