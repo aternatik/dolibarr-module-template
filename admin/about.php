@@ -31,6 +31,10 @@ if ( ! $res)
 // Libraries
 require_once DOL_DOCUMENT_ROOT . "/core/lib/admin.lib.php";
 require_once "../lib/mymodule.lib.php";
+
+dol_include_once('/mymodule/lib/PHP Markdown 1.0.1o/markdown.php');
+
+
 //require_once "../class/myclass.class.php";
 // Translations
 $langs->load("mymodule@mymodule");
@@ -64,14 +68,18 @@ dol_fiche_head($head, 'about', $langs->trans("Module10000Name"), 0,
 // About page goes here
 echo $langs->trans("MyModuleAboutPage");
 
-$buffer = file_get_contents(dol_buildpath('/mymodule/README.md',0));
-print nl2br($buffer);
+print '<br>';
 
-print '<BR>';
+$buffer = file_get_contents(dol_buildpath('/mymodule/README.md',0));
+print Markdown($buffer);
+
+print '<br>';
+
+print '<a href="'.dol_buildpath('/mymodule/COPYING',1).'">';
 
 print '<img src="'.dol_buildpath('/mymodule/img/gplv3.png',1).'"/>';
 
-print '<a href="'.dol_buildpath('/mymodule/COPYING',1).'">License GPL V 3</a>';
+print '</a>';
 
 llxFooter();
 
