@@ -12,48 +12,62 @@ See COPYING for more information.
 INSTALL
 -------
 
-To install this module,  Dolibarr (> v = 3.3) have to be already
-installed and configured on your server. It should be fully operational.
+To install this module, Dolibarr (v >= 3.3) have to be already installed and configured on your server.
 
-- In your  Dolibarr installation directory edit the file htdocs/conf/conf.php
+- In your Dolibarr installation directory: edit the htdocs/conf/conf.php file
 - Find the following lines:
-	#$=dolibarr_main_url_root_alt ...
-	#$=dolibarr_main_document_root_alt ...
-	or 
+
+	\#$=dolibarr_main_url_root_alt ...
+
+	\#$=dolibarr_main_document_root_alt ...
+
+	or
+
 	//$=dolibarr_main_url_root_alt ...
+
 	//$=dolibarr_main_document_root_alt ...
-- Delete the first "#" (or "//") of these lines and assign a value consistent with your Dolibarr instalation
- $ Dolibarr_main_url_root = ... and $ dolibarr_main_document_root ...
- 
-example for a UNIX system:
+
+- Delete the first "#" (or "//") of these lines and assign a value consistent with your Dolibarr installation
+
+	$dolibarr_main_url_root = ...
+
+	and
+
+	$dolibarr_main_document_root = ...
+
+for example on UNIX systems:
+
 	$dolibarr_main_url_root = 'http://localhost/Dolibarr/htdocs';
+
 	$dolibarr_main_document_root = '/var/www/Dolibarr/htdocs';
+
 	$dolibarr_main_url_root_alt = 'http://localhost/Dolibarr/htdocs/custom';
+
 	$dolibarr_main_document_root_alt = '/var/www/Dolibarr/htdocs/custom';
 
-example for a Windows system:
+for example on a Windows system:
+
 	$dolibarr_main_url_root = 'http://localhost/Dolibarr/htdocs';
+
 	$dolibarr_main_document_root = 'C:/My Web Sites/Dolibarr/htdocs';
+
 	$dolibarr_main_url_root_alt = 'http://localhost/Dolibarr/htdocs/custom';
+
 	$dolibarr_main_document_root_alt = 'C:/My Web Sites/Dolibarr/htdocs/custom';
 
-For more information on the file conf.php file open it conf.php.example
+For more information about the conf.php file take a look at the conf.php.example file.
 
-- Extract the module files in the directory dolibarr_main_document_root_alt
+- Extract the module's files in the $dolibarr_main_document_root_alt directory.
+(You may have to create the custom directory first if it doesn't exist yet.)
 
-- Create the directory custom if it do not exist 
+for example on UNIX systems: /var/www/Dolibarr/htdocs/custom
 
-example for a UNIX system: /var/www/Dolibarr/htdocs
-example for a Windows system: C:/My Web Sites/Dolibarr/htdocs/custom
+for example on a Windows system: C:/My Web Sites/Dolibarr/htdocs/custom
 
-- From your browser, log in as administrator dolibarr
-  and left click on the "configuration" menu.
-  Then click on the submenu "module".
-  On the screen that appears and you whouls be able to see the new module (check all tabs, ban be in other than first one)
-  The status menu should then proceed to "Enable" menu "Management
-  training "should appear at the top of the application.
-- Check the security right (Users->permitions) to be sure that right are correctly set for user or users group
+- From your browser: log in as a dolibarr administrator and left-click on the "configuration" menu then on the "module" submenu .
+- On the screen that appears, you should see the new module (check all tabs, it can be in other than first one)
+- Check the security rights (users->permissions) to make sure that rights are correctly set for users and groups
 
 Other Licences
 --------------
-Uses Michel Fortin's PHP Markdown Licensed under BSD to display this README.
+Uses Michel Fortin's PHP Markdown Licensed under BSD to display this README.
