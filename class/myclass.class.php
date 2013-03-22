@@ -90,15 +90,15 @@ class SkeletonClass // extends CommonObject
 
 		dol_syslog(get_class($this) . "::create sql=" . $sql, LOG_DEBUG);
 		$resql = $this->db->query($sql);
-		if ( ! $resql) {
+		if (! $resql) {
 			$error ++;
 			$this->errors[] = "Error " . $this->db->lasterror();
 		}
 
-		if ( ! $error) {
+		if (! $error) {
 			$this->id = $this->db->last_insert_id(MAIN_DB_PREFIX . "mytable");
 
-			if ( ! $notrigger) {
+			if (! $notrigger) {
 				// Uncomment this and change MYOBJECT to your own tag if you
 				// want this action call a trigger.
 				//// Call triggers
@@ -195,13 +195,13 @@ class SkeletonClass // extends CommonObject
 
 		dol_syslog(get_class($this) . "::update sql=" . $sql, LOG_DEBUG);
 		$resql = $this->db->query($sql);
-		if ( ! $resql) {
+		if (! $resql) {
 			$error ++;
 			$this->errors[] = "Error " . $this->db->lasterror();
 		}
 
-		if ( ! $error) {
-			if ( ! $notrigger) {
+		if (! $error) {
+			if (! $notrigger) {
 				// Uncomment this and change MYOBJECT to your own tag if you
 				// want this action call a trigger.
 				//// Call triggers
@@ -241,8 +241,8 @@ class SkeletonClass // extends CommonObject
 
 		$this->db->begin();
 
-		if ( ! $error) {
-			if ( ! $notrigger) {
+		if (! $error) {
+			if (! $notrigger) {
 				// Uncomment this and change MYOBJECT to your own tag if you
 				// want this action call a trigger.
 				//// Call triggers
@@ -254,13 +254,13 @@ class SkeletonClass // extends CommonObject
 			}
 		}
 
-		if ( ! $error) {
+		if (! $error) {
 			$sql = "DELETE FROM " . MAIN_DB_PREFIX . "mytable";
 			$sql.= " WHERE rowid=" . $this->id;
 
 			dol_syslog(get_class($this) . "::delete sql=" . $sql);
 			$resql = $this->db->query($sql);
-			if ( ! $resql) {
+			if (! $resql) {
 				$error ++;
 				$this->errors[] = "Error " . $this->db->lasterror();
 			}
@@ -312,12 +312,12 @@ class SkeletonClass // extends CommonObject
 			$error ++;
 		}
 
-		if ( ! $error) {
+		if (! $error) {
 			// Do something
 		}
 
 		// End
-		if ( ! $error) {
+		if (! $error) {
 			$this->db->commit();
 			return $object->id;
 		} else {

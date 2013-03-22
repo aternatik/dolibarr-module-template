@@ -52,7 +52,7 @@ $langs->load("main");	// To load language file for default language
 // Load user and its permissions
 // Load user for login 'admin'. Comment line to run as anonymous user.
 $result = $user->fetch('', 'admin');
-if ( ! $result > 0) {
+if (! $result > 0) {
 	dol_print_error('', $user->error);
 	exit;
 }
@@ -149,7 +149,7 @@ $myobject = new SkeletonClass($db);
 
 // -------------------- END OF YOUR CODE --------------------
 
-if ( ! $error) {
+if (! $error) {
 	$db->commit();
 	echo '--- end ok' . "\n";
 } else {

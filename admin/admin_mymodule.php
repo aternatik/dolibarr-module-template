@@ -38,7 +38,7 @@ $langs->load("mymodule@mymodule");
 
 // Access control
 if (! $user->admin) {
-    accessforbidden();
+	accessforbidden();
 }
 
 // Parameters
