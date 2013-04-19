@@ -33,7 +33,7 @@ if (! $res) {
 require_once DOL_DOCUMENT_ROOT . "/core/lib/admin.lib.php";
 require_once "../lib/mymodule.lib.php";
 
-dol_include_once('/mymodule/lib/PHP_Markdown_1.0.1o/markdown.php');
+dol_include_once('/mymodule/lib/php-markdown/markdown.php');
 
 
 //require_once "../class/myclass.class.php";
