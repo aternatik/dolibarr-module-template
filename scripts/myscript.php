@@ -30,10 +30,10 @@ $path = dirname(__FILE__) . '/';
 
 // Test if batch mode
 if (substr($sapi_type, 0, 3) == 'cgi') {
-	echo "Error: You are using PHP for CGI. To execute ";
-	echo $script_file;
-	echo " from command line, you must use PHP for CLI mode.\n";
-	exit;
+    echo "Error: You are using PHP for CGI. To execute ";
+    echo $script_file;
+    echo " from command line, you must use PHP for CLI mode.\n";
+    exit;
 }
 
 // Global variables
@@ -53,17 +53,17 @@ $langs->load("main");	// To load language file for default language
 // Load user for login 'admin'. Comment line to run as anonymous user.
 $result = $user->fetch('', 'admin');
 if (! $result > 0) {
-	dol_print_error('', $user->error);
-	exit;
+    dol_print_error('', $user->error);
+    exit;
 }
 $user->getrights();
 
 
 echo "***** " . $script_file . " (" . $version . ") *****\n";
 if (! isset($argv[1])) {
-	// Check parameters
-	echo "Usage: " . $script_file . " param1 param2 ...\n";
-	exit;
+    // Check parameters
+    echo "Usage: " . $script_file . " param1 param2 ...\n";
+    exit;
 }
 echo '--- start' . "\n";
 echo 'Argument 1=' . $argv[1] . "\n";
@@ -80,81 +80,77 @@ $myobject = new SkeletonClass($db);
 
 // Example for inserting creating object in database
 /*
-	dol_syslog($script_file." CREATE", LOG_DEBUG);
-	$myobject->prop1='value_prop1';
-	$myobject->prop2='value_prop2';
-	$id=$myobject->create($user);
-	if ($id < 0) { $error++; dol_print_error($db,$myobject->error); }
-	else echo "Object created with id=".$id."\n";
+    dol_syslog($script_file." CREATE", LOG_DEBUG);
+    $myobject->prop1='value_prop1';
+    $myobject->prop2='value_prop2';
+    $id=$myobject->create($user);
+    if ($id < 0) { $error++; dol_print_error($db,$myobject->error); } else echo "Object created with id=".$id."\n";
  */
 
 // Example for reading object from database
 /*
-	dol_syslog($script_file." FETCH", LOG_DEBUG);
-	$result=$myobject->fetch($id);
-	if ($result < 0) { $error; dol_print_error($db,$myobject->error); }
-	else echo "Object with id=".$id." loaded\n";
+    dol_syslog($script_file." FETCH", LOG_DEBUG);
+    $result=$myobject->fetch($id);
+    if ($result < 0) { $error; dol_print_error($db,$myobject->error); } else echo "Object with id=".$id." loaded\n";
  */
 
 // Example for updating object in database
 // ($myobject must have been loaded by a fetch before)
 /*
-	dol_syslog($script_file." UPDATE", LOG_DEBUG);
-	$myobject->prop1='newvalue_prop1';
-	$myobject->prop2='newvalue_prop2';
-	$result=$myobject->update($user);
-	if ($result < 0) { $error++; dol_print_error($db,$myobject->error); }
-	else echo "Object with id ".$myobject->id." updated\n";
+    dol_syslog($script_file." UPDATE", LOG_DEBUG);
+    $myobject->prop1='newvalue_prop1';
+    $myobject->prop2='newvalue_prop2';
+    $result=$myobject->update($user);
+    if ($result < 0) { $error++; dol_print_error($db,$myobject->error); } else echo "Object with id ".$myobject->id." updated\n";
  */
 
 // Example for deleting object in database
 // ($myobject must have been loaded by a fetch before)
 /*
-	dol_syslog($script_file." DELETE", LOG_DEBUG);
-	$result=$myobject->delete($user);
-	if ($result < 0) { $error++; dol_print_error($db,$myobject->error); }
-	else echo "Object with id ".$myobject->id." deleted\n";
+    dol_syslog($script_file." DELETE", LOG_DEBUG);
+    $result=$myobject->delete($user);
+    if ($result < 0) { $error++; dol_print_error($db,$myobject->error); } else echo "Object with id ".$myobject->id." deleted\n";
  */
 
 
 // An example of a direct SQL read without using the fetch method
 /*
-	$sql = "SELECT field1, field2";
-	$sql.= " FROM ".MAIN_DB_PREFIX."c_pays";
-	$sql.= " WHERE field3 = 'xxx'";
-	$sql.= " ORDER BY field1 ASC";
+    $sql = "SELECT field1, field2";
+    $sql.= " FROM ".MAIN_DB_PREFIX."c_pays";
+    $sql.= " WHERE field3 = 'xxx'";
+    $sql.= " ORDER BY field1 ASC";
 
-	dol_syslog($script_file." sql=".$sql, LOG_DEBUG);
-	$resql=$db->query($sql);
-	if ($resql) {
-		$num = $db->num_rows($resql);
-		$i = 0;
-		if ($num) {
-			while ($i < $num) {
-				$obj = $db->fetch_object($resql);
-				if ($obj) {
-					// You can use here results
-					echo $obj->field1;
-					echo $obj->field2;
-				}
-				$i++;
-			}
-		}
-	} else {
-		$error++;
-		dol_print_error($db);
-	}
+    dol_syslog($script_file." sql=".$sql, LOG_DEBUG);
+    $resql=$db->query($sql);
+    if ($resql) {
+        $num = $db->num_rows($resql);
+        $i = 0;
+        if ($num) {
+            while ($i < $num) {
+                $obj = $db->fetch_object($resql);
+                if ($obj) {
+                    // You can use here results
+                    echo $obj->field1;
+                    echo $obj->field2;
+                }
+                $i++;
+            }
+        }
+    } else {
+        $error++;
+        dol_print_error($db);
+    }
  */
 
 
 // -------------------- END OF YOUR CODE --------------------
 
 if (! $error) {
-	$db->commit();
-	echo '--- end ok' . "\n";
+    $db->commit();
+    echo '--- end ok' . "\n";
 } else {
-	echo '--- end error code=' . $error . "\n";
-	$db->rollback();
+    echo '--- end error code=' . $error . "\n";
+    $db->rollback();
 }
 
 $db->close(); // Close database opened handler

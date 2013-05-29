@@ -33,309 +33,319 @@
 class SkeletonClass // extends CommonObject
 {
 
-	private $db; //!< To store db handler
-	public $error; //!< To return error code (or message)
-	public $errors = array(); //!< To return several error codes (or messages)
-	//public $element='skeleton';	//!< Id that identify managed objects
-	//public $table_element='skeleton';	//!< Name of table without prefix where object is stored
-	public $id;
-	public $prop1;
-	public $prop2;
+    private $db; //!< To store db handler
+    public $error; //!< To return error code (or message)
+    public $errors = array(); //!< To return several error codes (or messages)
+    //public $element='skeleton';	//!< Id that identify managed objects
+    //public $table_element='skeleton';	//!< Name of table without prefix where object is stored
+    public $id;
+    public $prop1;
+    public $prop2;
 
-	/**
-	 * Constructor
-	 *
-	 * 	@param	DoliDb		$db		Database handler
-	 */
-	public function __construct($db)
-	{
-		$this->db = $db;
-		return 1;
-	}
+    /**
+     * Constructor
+     *
+     * 	@param	DoliDb		$db		Database handler
+     */
+    public function __construct($db)
+    {
+        $this->db = $db;
 
-	/**
-	 * Create object into database
-	 *
-	 * 	@param		User	$user		User that create
-	 * 	@param		int		$notrigger	0=launch triggers after, 1=disable triggers
-	 * 	@return		int					<0 if KO, Id of created object if OK
-	 */
-	public function create($user, $notrigger = 0)
-	{
-		global $conf, $langs;
-		$error = 0;
+        return 1;
+    }
 
-		// Clean parameters
-		if (isset($this->prop1)) {
-			$this->prop1 = trim($this->prop1);
-		}
-		if (isset($this->prop2)) {
-			$this->prop2 = trim($this->prop2);
-		}
+    /**
+     * Create object into database
+     *
+     * 	@param		User	$user		User that create
+     * 	@param		int		$notrigger	0=launch triggers after, 1=disable triggers
+     * 	@return		int					<0 if KO, Id of created object if OK
+     */
+    public function create($user, $notrigger = 0)
+    {
+        global $conf, $langs;
+        $error = 0;
 
-		// Check parameters
-		// Put here code to add control on parameters values
-		// Insert request
-		$sql = "INSERT INTO " . MAIN_DB_PREFIX . "mytable(";
-		$sql.= " field1,";
-		$sql.= " field2";
+        // Clean parameters
+        if (isset($this->prop1)) {
+            $this->prop1 = trim($this->prop1);
+        }
+        if (isset($this->prop2)) {
+            $this->prop2 = trim($this->prop2);
+        }
 
-		$sql.= ") VALUES (";
-		$sql.= " '" . $this->prop1 . "',";
-		$sql.= " '" . $this->prop2 . "'";
+        // Check parameters
+        // Put here code to add control on parameters values
+        // Insert request
+        $sql = "INSERT INTO " . MAIN_DB_PREFIX . "mytable(";
+        $sql.= " field1,";
+        $sql.= " field2";
 
-		$sql.= ")";
+        $sql.= ") VALUES (";
+        $sql.= " '" . $this->prop1 . "',";
+        $sql.= " '" . $this->prop2 . "'";
 
-		$this->db->begin();
+        $sql.= ")";
 
-		dol_syslog(get_class($this) . "::create sql=" . $sql, LOG_DEBUG);
-		$resql = $this->db->query($sql);
-		if (! $resql) {
-			$error ++;
-			$this->errors[] = "Error " . $this->db->lasterror();
-		}
+        $this->db->begin();
 
-		if (! $error) {
-			$this->id = $this->db->last_insert_id(MAIN_DB_PREFIX . "mytable");
+        dol_syslog(get_class($this) . "::create sql=" . $sql, LOG_DEBUG);
+        $resql = $this->db->query($sql);
+        if (! $resql) {
+            $error ++;
+            $this->errors[] = "Error " . $this->db->lasterror();
+        }
 
-			if (! $notrigger) {
-				// Uncomment this and change MYOBJECT to your own tag if you
-				// want this action call a trigger.
-				//// Call triggers
-				//include_once DOL_DOCUMENT_ROOT . "/core/class/interfaces.class.php";
-				//$interface=new Interfaces($this->db);
-				//$result=$interface->run_triggers('MYOBJECT_CREATE',$this,$user,$langs,$conf);
-				//if ($result < 0) { $error++; $this->errors=$interface->errors; }
-				//// End call triggers
-			}
-		}
+        if (! $error) {
+            $this->id = $this->db->last_insert_id(MAIN_DB_PREFIX . "mytable");
 
-		// Commit or rollback
-		if ($error) {
-			foreach ($this->errors as $errmsg) {
-				dol_syslog(get_class($this) . "::create " . $errmsg, LOG_ERR);
-				$this->error.=($this->error ? ', ' . $errmsg : $errmsg);
-			}
-			$this->db->rollback();
-			return -1 * $error;
-		} else {
-			$this->db->commit();
-			return $this->id;
-		}
-	}
+            if (! $notrigger) {
+                // Uncomment this and change MYOBJECT to your own tag if you
+                // want this action call a trigger.
+                //// Call triggers
+                //include_once DOL_DOCUMENT_ROOT . "/core/class/interfaces.class.php";
+                //$interface=new Interfaces($this->db);
+                //$result=$interface->run_triggers('MYOBJECT_CREATE',$this,$user,$langs,$conf);
+                //if ($result < 0) { $error++; $this->errors=$interface->errors; }
+                //// End call triggers
+            }
+        }
 
-	/**
-	 * Load object in memory from database
-	 *
-	 * 	@param		int		$id	Id object
-	 * 	@return		int			<0 if KO, >0 if OK
-	 */
-	public function fetch($id)
-	{
-		global $langs;
-		$sql = "SELECT";
-		$sql.= " t.rowid,";
-		$sql.= " t.field1,";
-		$sql.= " t.field2";
-		//...
-		$sql.= " FROM " . MAIN_DB_PREFIX . "mytable as t";
-		$sql.= " WHERE t.rowid = " . $id;
+        // Commit or rollback
+        if ($error) {
+            foreach ($this->errors as $errmsg) {
+                dol_syslog(get_class($this) . "::create " . $errmsg, LOG_ERR);
+                $this->error.=($this->error ? ', ' . $errmsg : $errmsg);
+            }
+            $this->db->rollback();
 
-		dol_syslog(get_class($this) . "::fetch sql=" . $sql, LOG_DEBUG);
-		$resql = $this->db->query($sql);
-		if ($resql) {
-			if ($this->db->num_rows($resql)) {
-				$obj = $this->db->fetch_object($resql);
+            return -1 * $error;
+        } else {
+            $this->db->commit();
 
-				$this->id = $obj->rowid;
-				$this->prop1 = $obj->field1;
-				$this->prop2 = $obj->field2;
-				//...
-			}
-			$this->db->free($resql);
+            return $this->id;
+        }
+    }
 
-			return 1;
-		} else {
-			$this->error = "Error " . $this->db->lasterror();
-			dol_syslog(get_class($this) . "::fetch " . $this->error, LOG_ERR);
-			return -1;
-		}
-	}
+    /**
+     * Load object in memory from database
+     *
+     * 	@param		int		$id	Id object
+     * 	@return		int			<0 if KO, >0 if OK
+     */
+    public function fetch($id)
+    {
+        global $langs;
+        $sql = "SELECT";
+        $sql.= " t.rowid,";
+        $sql.= " t.field1,";
+        $sql.= " t.field2";
+        //...
+        $sql.= " FROM " . MAIN_DB_PREFIX . "mytable as t";
+        $sql.= " WHERE t.rowid = " . $id;
 
-	/**
-	 * Update object into database
-	 *
-	 * 	@param		User	$user		User that modify
-	 * 	@param		int		$notrigger	0=launch triggers after, 1=disable triggers
-	 * 	@return		int					<0 if KO, >0 if OK
-	 */
-	public function update($user = 0, $notrigger = 0)
-	{
-		global $conf, $langs;
-		$error = 0;
+        dol_syslog(get_class($this) . "::fetch sql=" . $sql, LOG_DEBUG);
+        $resql = $this->db->query($sql);
+        if ($resql) {
+            if ($this->db->num_rows($resql)) {
+                $obj = $this->db->fetch_object($resql);
 
-		// Clean parameters
-		if (isset($this->prop1)) {
-			$this->prop1 = trim($this->prop1);
-		}
-		if (isset($this->prop2)) {
-			$this->prop2 = trim($this->prop2);
-		}
+                $this->id = $obj->rowid;
+                $this->prop1 = $obj->field1;
+                $this->prop2 = $obj->field2;
+                //...
+            }
+            $this->db->free($resql);
 
-		// Check parameters
-		// Put here code to add control on parameters values
-		// Update request
-		$sql = "UPDATE " . MAIN_DB_PREFIX . "mytable SET";
-		$sql.= " field1=" . (isset($this->field1) ? "'" . $this->db->escape($this->field1) . "'" : "null") . ",";
-		$sql.= " field2=" . (isset($this->field2) ? "'" . $this->db->escape($this->field2) . "'" : "null") . "";
+            return 1;
+        } else {
+            $this->error = "Error " . $this->db->lasterror();
+            dol_syslog(get_class($this) . "::fetch " . $this->error, LOG_ERR);
 
-		$sql.= " WHERE rowid=" . $this->id;
+            return -1;
+        }
+    }
 
-		$this->db->begin();
+    /**
+     * Update object into database
+     *
+     * 	@param		User	$user		User that modify
+     * 	@param		int		$notrigger	0=launch triggers after, 1=disable triggers
+     * 	@return		int					<0 if KO, >0 if OK
+     */
+    public function update($user = 0, $notrigger = 0)
+    {
+        global $conf, $langs;
+        $error = 0;
 
-		dol_syslog(get_class($this) . "::update sql=" . $sql, LOG_DEBUG);
-		$resql = $this->db->query($sql);
-		if (! $resql) {
-			$error ++;
-			$this->errors[] = "Error " . $this->db->lasterror();
-		}
+        // Clean parameters
+        if (isset($this->prop1)) {
+            $this->prop1 = trim($this->prop1);
+        }
+        if (isset($this->prop2)) {
+            $this->prop2 = trim($this->prop2);
+        }
 
-		if (! $error) {
-			if (! $notrigger) {
-				// Uncomment this and change MYOBJECT to your own tag if you
-				// want this action call a trigger.
-				//// Call triggers
-				//include_once DOL_DOCUMENT_ROOT . "/core/class/interfaces.class.php";
-				//$interface=new Interfaces($this->db);
-				//$result=$interface->run_triggers('MYOBJECT_MODIFY',$this,$user,$langs,$conf);
-				//if ($result < 0) { $error++; $this->errors=$interface->errors; }
-				//// End call triggers
-			}
-		}
+        // Check parameters
+        // Put here code to add control on parameters values
+        // Update request
+        $sql = "UPDATE " . MAIN_DB_PREFIX . "mytable SET";
+        $sql.= " field1=" . (isset($this->field1) ? "'" . $this->db->escape($this->field1) . "'" : "null") . ",";
+        $sql.= " field2=" . (isset($this->field2) ? "'" . $this->db->escape($this->field2) . "'" : "null") . "";
 
-		// Commit or rollback
-		if ($error) {
-			foreach ($this->errors as $errmsg) {
-				dol_syslog(get_class($this) . "::update " . $errmsg, LOG_ERR);
-				$this->error.=($this->error ? ', ' . $errmsg : $errmsg);
-			}
-			$this->db->rollback();
-			return -1 * $error;
-		} else {
-			$this->db->commit();
-			return 1;
-		}
-	}
+        $sql.= " WHERE rowid=" . $this->id;
 
-	/**
-	 * Delete object in database
-	 *
-	 * 	@param		User	$user		User that delete
-	 * 	@param		int		$notrigger	0=launch triggers after, 1=disable triggers
-	 * 	@return		int					<0 if KO, >0 if OK
-	 */
-	public function delete($user, $notrigger = 0)
-	{
-		global $conf, $langs;
-		$error = 0;
+        $this->db->begin();
 
-		$this->db->begin();
+        dol_syslog(get_class($this) . "::update sql=" . $sql, LOG_DEBUG);
+        $resql = $this->db->query($sql);
+        if (! $resql) {
+            $error ++;
+            $this->errors[] = "Error " . $this->db->lasterror();
+        }
 
-		if (! $error) {
-			if (! $notrigger) {
-				// Uncomment this and change MYOBJECT to your own tag if you
-				// want this action call a trigger.
-				//// Call triggers
-				//include_once DOL_DOCUMENT_ROOT . "/core/class/interfaces.class.php";
-				//$interface=new Interfaces($this->db);
-				//$result=$interface->run_triggers('MYOBJECT_DELETE',$this,$user,$langs,$conf);
-				//if ($result < 0) { $error++; $this->errors=$interface->errors; }
-				//// End call triggers
-			}
-		}
+        if (! $error) {
+            if (! $notrigger) {
+                // Uncomment this and change MYOBJECT to your own tag if you
+                // want this action call a trigger.
+                //// Call triggers
+                //include_once DOL_DOCUMENT_ROOT . "/core/class/interfaces.class.php";
+                //$interface=new Interfaces($this->db);
+                //$result=$interface->run_triggers('MYOBJECT_MODIFY',$this,$user,$langs,$conf);
+                //if ($result < 0) { $error++; $this->errors=$interface->errors; }
+                //// End call triggers
+            }
+        }
 
-		if (! $error) {
-			$sql = "DELETE FROM " . MAIN_DB_PREFIX . "mytable";
-			$sql.= " WHERE rowid=" . $this->id;
+        // Commit or rollback
+        if ($error) {
+            foreach ($this->errors as $errmsg) {
+                dol_syslog(get_class($this) . "::update " . $errmsg, LOG_ERR);
+                $this->error.=($this->error ? ', ' . $errmsg : $errmsg);
+            }
+            $this->db->rollback();
 
-			dol_syslog(get_class($this) . "::delete sql=" . $sql);
-			$resql = $this->db->query($sql);
-			if (! $resql) {
-				$error ++;
-				$this->errors[] = "Error " . $this->db->lasterror();
-			}
-		}
+            return -1 * $error;
+        } else {
+            $this->db->commit();
 
-		// Commit or rollback
-		if ($error) {
-			foreach ($this->errors as $errmsg) {
-				dol_syslog(get_class($this) . "::delete " . $errmsg, LOG_ERR);
-				$this->error.=($this->error ? ', ' . $errmsg : $errmsg);
-			}
-			$this->db->rollback();
-			return -1 * $error;
-		} else {
-			$this->db->commit();
-			return 1;
-		}
-	}
+            return 1;
+        }
+    }
 
-	/**
-	 * Load an object from its id and create a new one in database
-	 *
-	 * 	@param		int		$fromid		Id of object to clone
-	 * 	@return		int					New id of clone
-	 */
-	public function createFromClone($fromid)
-	{
-		global $user, $langs;
+    /**
+     * Delete object in database
+     *
+     * 	@param		User	$user		User that delete
+     * 	@param		int		$notrigger	0=launch triggers after, 1=disable triggers
+     * 	@return		int					<0 if KO, >0 if OK
+     */
+    public function delete($user, $notrigger = 0)
+    {
+        global $conf, $langs;
+        $error = 0;
 
-		$error = 0;
+        $this->db->begin();
 
-		$object = new SkeletonClass($this->db);
+        if (! $error) {
+            if (! $notrigger) {
+                // Uncomment this and change MYOBJECT to your own tag if you
+                // want this action call a trigger.
+                //// Call triggers
+                //include_once DOL_DOCUMENT_ROOT . "/core/class/interfaces.class.php";
+                //$interface=new Interfaces($this->db);
+                //$result=$interface->run_triggers('MYOBJECT_DELETE',$this,$user,$langs,$conf);
+                //if ($result < 0) { $error++; $this->errors=$interface->errors; }
+                //// End call triggers
+            }
+        }
 
-		$this->db->begin();
+        if (! $error) {
+            $sql = "DELETE FROM " . MAIN_DB_PREFIX . "mytable";
+            $sql.= " WHERE rowid=" . $this->id;
 
-		// Load source object
-		$object->fetch($fromid);
-		$object->id = 0;
-		$object->statut = 0;
+            dol_syslog(get_class($this) . "::delete sql=" . $sql);
+            $resql = $this->db->query($sql);
+            if (! $resql) {
+                $error ++;
+                $this->errors[] = "Error " . $this->db->lasterror();
+            }
+        }
 
-		// Clear fields
-		// ...
-		// Create clone
-		$result = $object->create($user);
+        // Commit or rollback
+        if ($error) {
+            foreach ($this->errors as $errmsg) {
+                dol_syslog(get_class($this) . "::delete " . $errmsg, LOG_ERR);
+                $this->error.=($this->error ? ', ' . $errmsg : $errmsg);
+            }
+            $this->db->rollback();
 
-		// Other options
-		if ($result < 0) {
-			$this->error = $object->error;
-			$error ++;
-		}
+            return -1 * $error;
+        } else {
+            $this->db->commit();
 
-		if (! $error) {
-			// Do something
-		}
+            return 1;
+        }
+    }
 
-		// End
-		if (! $error) {
-			$this->db->commit();
-			return $object->id;
-		} else {
-			$this->db->rollback();
-			return -1;
-		}
-	}
+    /**
+     * Load an object from its id and create a new one in database
+     *
+     * 	@param		int		$fromid		Id of object to clone
+     * 	@return		int					New id of clone
+     */
+    public function createFromClone($fromid)
+    {
+        global $user, $langs;
 
-	/**
-	 * Initialise object with example values
-	 * Id must be 0 if object instance is a specimen
-	 *
-	 * 	@return		void
-	 */
-	public function initAsSpecimen()
-	{
-		$this->id = 0;
-		$this->prop1 = 'prop1';
-		$this->prop2 = 'prop2';
-	}
+        $error = 0;
+
+        $object = new SkeletonClass($this->db);
+
+        $this->db->begin();
+
+        // Load source object
+        $object->fetch($fromid);
+        $object->id = 0;
+        $object->statut = 0;
+
+        // Clear fields
+        // ...
+        // Create clone
+        $result = $object->create($user);
+
+        // Other options
+        if ($result < 0) {
+            $this->error = $object->error;
+            $error ++;
+        }
+
+        if (! $error) {
+            // Do something
+        }
+
+        // End
+        if (! $error) {
+            $this->db->commit();
+
+            return $object->id;
+        } else {
+            $this->db->rollback();
+
+            return -1;
+        }
+    }
+
+    /**
+     * Initialise object with example values
+     * Id must be 0 if object instance is a specimen
+     *
+     * 	@return		void
+     */
+    public function initAsSpecimen()
+    {
+        $this->id = 0;
+        $this->prop1 = 'prop1';
+        $this->prop2 = 'prop2';
+    }
 }

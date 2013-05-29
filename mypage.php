@@ -40,26 +40,26 @@
 // (../, ../../, etc)
 $res = 0;
 if (! $res && file_exists("../main.inc.php")) {
-	$res = @include("../main.inc.php");
+    $res = @include("../main.inc.php");
 }
 if (! $res && file_exists("../../main.inc.php")) {
-	$res = @include("../../main.inc.php");
+    $res = @include("../../main.inc.php");
 }
 if (! $res && file_exists("../../../main.inc.php")) {
-	$res = @include("../../../main.inc.php");
+    $res = @include("../../../main.inc.php");
 }
 // The following should only be used in development environments
 if (! $res && file_exists("../../../dolibarr/htdocs/main.inc.php")) {
-	$res = @include("../../../dolibarr/htdocs/main.inc.php");
+    $res = @include("../../../dolibarr/htdocs/main.inc.php");
 }
 if (! $res && file_exists("../../../../dolibarr/htdocs/main.inc.php")) {
-	$res = @include("../../../../dolibarr/htdocs/main.inc.php");
+    $res = @include("../../../../dolibarr/htdocs/main.inc.php");
 }
 if (! $res && file_exists("../../../../../dolibarr/htdocs/main.inc.php")) {
-	$res = @include("../../../../../dolibarr/htdocs/main.inc.php");
+    $res = @include("../../../../../dolibarr/htdocs/main.inc.php");
 }
 if (! $res) {
-	die("Main include failed");
+    die("Main include failed");
 }
 // Change this following line to use the correct relative path from htdocs
 // (do not remove DOL_DOCUMENT_ROOT)
@@ -75,10 +75,9 @@ $myparam = GETPOST('myparam', 'alpha');
 
 // Access control
 if ($user->societe_id > 0) {
-	// External user
-	accessforbidden();
+    // External user
+    accessforbidden();
 }
-
 
 /*
  * ACTIONS
@@ -87,18 +86,17 @@ if ($user->societe_id > 0) {
  */
 
 if ($action == 'add') {
-	$myobject = new SkeletonClass($db);
-	$myobject->prop1 = $_POST["field1"];
-	$myobject->prop2 = $_POST["field2"];
-	$result = $myobject->create($user);
-	if ($result > 0) {
-		// Creation OK
-	} {
-		// Creation KO
-		$mesg = $myobject->error;
-	}
+    $myobject = new SkeletonClass($db);
+    $myobject->prop1 = $_POST["field1"];
+    $myobject->prop2 = $_POST["field2"];
+    $result = $myobject->create($user);
+    if ($result > 0) {
+        // Creation OK
+    } {
+        // Creation KO
+        $mesg = $myobject->error;
+    }
 }
-
 
 /*
  * VIEW
@@ -110,27 +108,24 @@ llxHeader('', 'MyPageName', '');
 
 $form = new Form($db);
 
-
 // Put here content of your page
 // Example 1 : Adding jquery code
 echo '<script type="text/javascript" language="javascript">
 jQuery(document).ready(function() {
-	function init_myfunc()
-	{
-		jQuery("#myid").removeAttr(\'disabled\');
-		jQuery("#myid").attr(\'disabled\',\'disabled\');
-	}
-	init_myfunc();
-	jQuery("#mybutton").click(function() {
-		init_needroot();
-	});
+    public function init_myfunc()
+    {
+        jQuery("#myid").removeAttr(\'disabled\');
+        jQuery("#myid").attr(\'disabled\',\'disabled\');
+    }
+    init_myfunc();
+    jQuery("#mybutton").click(function() {
+        init_needroot();
+    });
 });
 </script>';
 
-
 // Example 2 : Adding jquery code
 $somethingshown = $myobject->showLinkedObjectBlock();
-
 
 // End of page
 llxFooter();
