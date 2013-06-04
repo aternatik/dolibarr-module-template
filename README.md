@@ -64,9 +64,12 @@ for example on UNIX systems: /var/www/Dolibarr/htdocs/custom
 
 for example on a Windows system: C:/My Web Sites/Dolibarr/htdocs/custom
 
-- From your browser: log in as a dolibarr administrator and left-click on the "configuration" menu then on the "module" submenu .
-- On the screen that appears, you should see the new module (check all tabs, it can be in other than first one)
-- Check the security rights (users->permissions) to make sure that rights are correctly set for users and groups
+From your browser:
+- log in as a Dolibarr administrator
+- under "Setup" -> "Other setup", set "MAIN_FEATURES_LEVEL" to "2"
+- go to "Setup" -> "Modules"
+- the module is under one of the tabs
+- you should now be able to enable the new module
 
 Other Licences
 --------------
