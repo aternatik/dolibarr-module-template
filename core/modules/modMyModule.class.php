@@ -167,6 +167,7 @@ class modMyModule extends DolibarrModules
         // (replace 'x' by type of category (0=product, 1=supplier, 2=customer, 3=member)
         // Dictionnaries
         if (! isset($conf->mymodule->enabled)) {
+            $conf->mymodule=new stdClass();
             $conf->mymodule->enabled = 0;
         }
         $this->dictionnaries = array();
